@@ -1,30 +1,18 @@
 #!/usr/bin/env ruby
 
-nums = [1, 2, 3, 4, 5, 6]
-
-for i in 0..5
-    anums = nums.clone
-    a = anums.delete_at(i)
-    for j in 0..4
-        bnums = anums.clone
-        b = bnums.delete_at(j)
-        for k in 0..3
-            cnums = bnums.clone
-            c = cnums.delete_at(k)
-            for l in 0..2
-                dnums = cnums.clone
-                d = dnums.delete_at(l)
-                for m in 0..1
-                    enums = dnums.clone
-                    e = enums.delete_at(m)
-                    f = enums.delete_at(0)
-                    #puts "#{a} #{b} #{c} #{d} #{e} #{f}"
-                    if (a * 10 + b) - (c * 10 + d) == (e * 10 + f)
-                        puts "#{a * 10 + b} - #{c * 10 + d} = #{e * 10 + f}"
-                    end
-                    #nums = [1, 2, 3, 4, 5, 6]
-                end
+def iterate(snums, svals = [])
+    for i in 0..(snums.length-1)
+        nums = snums.clone
+        vals = svals.clone
+        vals.push(nums.delete_at(i))
+        if nums.empty?
+            if (vals[0] * 10 + vals[1]) - (vals[2] * 10 + vals[3]) == (vals[4] * 10 + vals[5])
+                puts vals
             end
+        else
+            iterate(nums, vals)
         end
     end
 end
+
+iterate([6, 5, 4, 3, 2, 1])
